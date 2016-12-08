@@ -24,10 +24,9 @@ if (typeof jQuery === 'undefined') {
         this.$scrollX = null;
         this.$scrollY = null;
 
+
         this.createWrapContainer(this.options);
-        $(document).on(MOUDEUP_EVENT_NAME, function () {
-            $(document).off(MOUSEMOVE_EVENT_NAME);
-        });
+        this.unloadEvent();
         this.createScrollX(this.options);
         this.createScrollY(this.options);
     };
@@ -228,6 +227,12 @@ if (typeof jQuery === 'undefined') {
                 $element.css('top', ($element.position().top - dis * yScale) + 'px');
                 lastY = e1.pageY;
             });
+        });
+    };
+
+    Scroll.prototype.unloadEvent = function () {
+        $(document).on(MOUDEUP_EVENT_NAME, function () {
+            $(document).off(MOUSEMOVE_EVENT_NAME);
         });
     };
 
